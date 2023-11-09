@@ -32,3 +32,41 @@ function returnPossibleMoves(x, y) {
 }
 
 console.log(movesGraph());
+function bfs(graph, start, end) {
+  let queue = [];
+  queue.push({
+    to: start.join(","),
+    from: null,
+    cost: 0,
+  });
+  let path = {};
+  while (queue.length) {
+    if (path[queue[0].to] && queue[0].cost == path[queue[0].to].cost) {
+      path[queue[0].to].from.push(queue[0].from);
+      queue.shift();
+      continue;
+    }
+    if (path[queue[0].to]) {
+      queue.shift();
+      continue;
+    }
+    path[queue[0].to] = {
+      from: [queue[0].from],
+      cost: queue[0].cost,
+    };
+    for (let move of graph[queue[0].to]) {
+      if (path[move]) {
+        continue;
+      }
+      let obj = {
+        to: move,
+        from: queue[0].to,
+        cost: queue[0].cost + 1,
+      };
+      queue.push(obj);
+    }
+    queue.shift();
+  }
+  return path;
+}
+

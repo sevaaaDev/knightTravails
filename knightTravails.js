@@ -72,3 +72,24 @@ function bfs(graph, start, end) {
   return path;
 }
 
+function getShortestPath(path, move) {
+  if (!path[move].from[0]) {
+    return [move];
+  }
+  let arr = [];
+  for (let i = 0; i < path[move].from.length; i++) {
+    let road = getShortestPath(path, path[move].from[i]);
+    for (let j = 0; j < road.length; j++) {
+      let moves = [];
+      moves = moves.concat(road[j], move);
+      arr.push(moves);
+    }
+  }
+  return arr;
+}
+
+let graph = movesGraph();
+let arr = [];
+
+let path = bfs(graph, [0, 0], [3, 1]);
+console.log(getShortestPath(path, "7,7"));

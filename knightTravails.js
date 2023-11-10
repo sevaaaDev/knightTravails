@@ -1,5 +1,16 @@
 function knightMoves(from, to) {
-  // do stuff
+  let graph = movesGraph();
+  let path = bfs(graph, from);
+  let shortPath = getShortestPath(path, to.join(","));
+  console.log(
+    `you made it in ${shortPath[0].length - 1} moves!, here's your path`,
+  );
+  for (let i = 0; i < shortPath.length; i++) {
+    console.log(shortPath[i].join(" -> "));
+    if (i < shortPath.length - 1) {
+      console.log("");
+    }
+  }
 }
 
 function movesGraph() {
@@ -89,3 +100,4 @@ function getShortestPath(path, move) {
   }
   return arr;
 }
+knightMoves([0, 0], [7, 7]);

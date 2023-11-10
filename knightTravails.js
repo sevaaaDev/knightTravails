@@ -56,27 +56,21 @@ function bfs(graph, start) {
   while (queue.length) {
     if (path[queue[0].to] && queue[0].cost == path[queue[0].to].cost) {
       path[queue[0].to].from.push(queue[0].from);
-      queue.shift();
-      continue;
     }
-    if (path[queue[0].to]) {
-      queue.shift();
-      continue;
-    }
-    path[queue[0].to] = {
-      from: [queue[0].from],
-      cost: queue[0].cost,
-    };
-    for (let move of graph[queue[0].to]) {
-      if (path[move]) {
-        continue;
-      }
-      let obj = {
-        to: move,
-        from: queue[0].to,
-        cost: queue[0].cost + 1,
+    if (!path[queue[0].to]) {
+      path[queue[0].to] = {
+        from: [queue[0].from],
+        cost: queue[0].cost,
       };
-      queue.push(obj);
+      for (let move of graph[queue[0].to]) {
+        if (path[move]) continue;
+        let obj = {
+          to: move,
+          from: queue[0].to,
+          cost: queue[0].cost + 1,
+        };
+        queue.push(obj);
+      }
     }
     queue.shift();
   }
@@ -84,8 +78,8 @@ function bfs(graph, start) {
 }
 
 function getShortestPath(path, move) {
+  let coor = move.split(",");
   if (!path[move].from[0]) {
-    let coor = move.split(",");
     return [[[+coor[0], +coor[1]]]];
   }
   let arr = [];
@@ -93,11 +87,10 @@ function getShortestPath(path, move) {
     let road = getShortestPath(path, path[move].from[i]);
     for (let j = 0; j < road.length; j++) {
       let moves = [];
-      let coor = move.split(",");
       moves = moves.concat(road[j], [[+coor[0], +coor[1]]]);
       arr.push(moves);
     }
   }
   return arr;
 }
-knightMoves([5, 4], [0, 0]);
+knightMoves([7, 0], [3, 3]);

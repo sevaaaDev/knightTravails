@@ -74,13 +74,16 @@ function bfs(graph, start, end) {
 
 function getShortestPath(path, move) {
   if (!path[move].from[0]) {
-    return [move];
+    let coor = move.split(",");
+    return [[[+coor[0], +coor[1]]]];
   }
   let arr = [];
   for (let i = 0; i < path[move].from.length; i++) {
     let road = getShortestPath(path, path[move].from[i]);
     for (let j = 0; j < road.length; j++) {
       let moves = [];
+      let coor = move.split(",");
+      moves = moves.concat(road[j], [[+coor[0], +coor[1]]]);
       arr.push(moves);
     }
   }

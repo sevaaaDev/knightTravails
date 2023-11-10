@@ -37,15 +37,15 @@ function returnPossibleMoves(x, y) {
 
   return arr.filter((n) => {
     let coor = n.split(",");
-    if (coor[0] < 8 && coor[0] > 0) {
-      if (coor[1] < 8 && coor[1] > 0) {
+    if (coor[0] < 8 && coor[0] > -1) {
+      if (coor[1] < 8 && coor[1] > -1) {
         return true;
       }
     }
   });
 }
 
-function bfs(graph, start, end) {
+function bfs(graph, start) {
   let queue = [];
   queue.push({
     to: start.join(","),
@@ -100,4 +100,4 @@ function getShortestPath(path, move) {
   }
   return arr;
 }
-knightMoves([0, 0], [7, 7]);
+knightMoves([5, 4], [0, 0]);

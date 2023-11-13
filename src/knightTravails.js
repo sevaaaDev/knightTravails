@@ -1,4 +1,4 @@
-function knightMoves(from, to) {
+export function knightMoves(from, to) {
   let graph = movesGraph();
   let path = bfs(graph, from);
   let shortPath = getShortestPath(path, to.join(","));
@@ -11,6 +11,7 @@ function knightMoves(from, to) {
       console.log("");
     }
   }
+  return shortPath;
 }
 
 function movesGraph() {

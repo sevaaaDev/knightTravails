@@ -13,3 +13,15 @@ export function createBoard(container, moves) {
     }
   }
 }
+
+export function showPath(path) {
+  const info = document.querySelector(".info");
+  const movesDisplay = document.querySelector(".moves");
+  let text = `You made it in ${path.length - 1} moves`;
+  if (path.length === 2) {
+    text = text.slice(0, text.length - 1);
+  }
+  info.innerText = text;
+  let moves = path.join(" → ");
+  movesDisplay.innerText = moves;
+}

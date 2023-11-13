@@ -1,4 +1,4 @@
-import { createBoard } from "./display";
+import { createBoard, showPath } from "./display";
 import { knightMoves } from "./knightTravails";
 
 function clickHandler(e) {
@@ -10,7 +10,9 @@ function start(target) {
   container.removeEventListener("click", clickHandler);
   let moves = knightMoves(from, target);
   let delay = 0;
+  showPath(moves[0]);
   for (let i = 0; i < moves[0].length; i++) {
+    from = moves[0][i];
     if (i === moves[0].length - 1) {
       setTimeout(() => {
         createBoard(container, moves[0][i]);
@@ -21,7 +23,6 @@ function start(target) {
     setTimeout(() => {
       createBoard(container, moves[0][i]);
     }, delay);
-    from = moves[0][i];
     delay = delay + 500;
   }
 }

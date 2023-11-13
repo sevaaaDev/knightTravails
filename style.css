@@ -4,12 +4,20 @@
   box-sizing: border-box;
 }
 
+h1 {
+  text-align: center;
+  margin: 1rem 0;
+}
+
 .container {
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   border: 1px solid black;
-  width: 500px;
-  min-height: 500px;
+  width: 90vw;
+  height: 90vw;
+  max-width: 500px;
+  max-height: 500px;
 }
 
 .square {
@@ -20,6 +28,9 @@
   background-image: url("assets/knight.png");
   background-size: cover;
 }
-/* img { */
-/*   width: 100%; */
-/* } */
+
+.display {
+  margin: 1rem 0;
+  text-align: center;
+  font-size: 1.5rem;
+}

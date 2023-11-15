@@ -6,6 +6,9 @@ export function createBoard(container, moves) {
       square.setAttribute("data-row", x);
       square.setAttribute("data-col", y);
       square.classList.add("square");
+      if ((x + 1) % 2 == (y + 1) % 2) {
+        square.classList.add("black");
+      }
       if (moves[0] === x && moves[1] === y) {
         square.classList.add("knight");
       }
@@ -22,6 +25,6 @@ export function showPath(path) {
     text = text.slice(0, text.length - 1);
   }
   info.innerText = text;
-  let moves = path.join(" → ");
+  let moves = path.join(" > ");
   movesDisplay.innerText = moves;
 }
